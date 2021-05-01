@@ -1,6 +1,8 @@
 import "./App.css";
 import React from "react";
-const firebase = require("firebase");
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import sidebarComponent from './sidebar/sidebar';
 
 class App extends React.Component {
   constructor() {
@@ -13,11 +15,17 @@ class App extends React.Component {
   }
 
   render() {
-    return <h1>Hello world</h1>;
+    return(
+      <div>
+      <h1>hello</h1>
+         <sidebarComponent></sidebarComponent>
+         <editorComponet></editorComponet>
+      </div>
+    );
   }
   componentDidMount = () => {
     firebase
-      .fireStore()
+      .firestore()
       .collection("notes")
       .onSnapshot((serverUpdate) => {
         const notes = serverUpdate.docs.map((_doc) => {
