@@ -2,7 +2,8 @@ import "./App.css";
 import React from "react";
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import sidebarComponent from './sidebar/sidebar';
+import SidebarComponent from './sidebar/sidebar'
+import EditorComponent from './editor/editor'
 
 class App extends React.Component {
   constructor() {
@@ -17,9 +18,12 @@ class App extends React.Component {
   render() {
     return(
       <div>
-      <h1>hello</h1>
-         <sidebarComponent></sidebarComponent>
-         <editorComponet></editorComponet>
+         <SidebarComponent
+         selectedNoteIndex={this.state.selectedNoteIndex}
+         notes={this.state.notes}
+         ></SidebarComponent>
+         <EditorComponent></EditorComponent>
+
       </div>
     );
   }
