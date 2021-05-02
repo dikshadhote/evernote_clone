@@ -75,10 +75,8 @@ const{notes,classes,selectedNoteIndex}=this.props;
         console.log(this.state);
     }
 
-    selectNote = () =>
-    {
-        console.log('selected note');
-    }
+    selectNote = (n,i) =>{this.props.selectNote(n,i);} 
+    
 
     deleteNote=()=>
     {

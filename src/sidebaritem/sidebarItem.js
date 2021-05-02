@@ -26,14 +26,13 @@ class SidebarItemComponent extends React.Component {
             ></ListItemText>
           </div>
           <DeleteIcon
-            onClick={this.deleteNote(_note)}
+            onClick={()=>this.deleteNote(_note)}
             className={classes.deleteIcon}
           ></DeleteIcon>
         </ListItem>
       </div>
     );
   }
-
   selectNote = (n, i) => this.props.selectNote(n, i);
   deleteNote = (note) => {
     if (window.confirm(`Are you sure you want to delete: ${note.title}`)) {
