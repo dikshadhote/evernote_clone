@@ -14,6 +14,20 @@ class EditorComponent extends React.Component {
       id: "",
     };
   }
+
+  componentDidMount = () => {
+    this.setState(
+      {
+        text: this.props.selectedNote.body,
+        title: this.props.selectedNote.title,
+        id:this.props.selectedNote.id
+      }
+    );
+  }
+
+
+
+
   render() {
     const { classes } = this.props;
     return (
