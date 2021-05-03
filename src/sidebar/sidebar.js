@@ -72,15 +72,16 @@ const{notes,classes,selectedNoteIndex}=this.props;
 
     newNote = () =>
     {
-        console.log(this.state);
+        this.props.newNote(this.state.title);
+        this.setState({ title: null, addingNote: false });
     }
 
     selectNote = (n,i) =>{this.props.selectNote(n,i);} 
     
 
-    deleteNote=()=>
+    deleteNote=(note)=>
     {
-        console.log('Note deleted');
+       this.props.deleteNote(note);
     }
    
 }
