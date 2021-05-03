@@ -1,9 +1,9 @@
 import "./App.css";
 import React from "react";
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import SidebarComponent from './sidebar/sidebar'
-import EditorComponent from './editor/editor'
+import firebase from "firebase/app";
+import "firebase/firestore";
+import SidebarComponent from "./sidebar/sidebar";
+import EditorComponent from "./editor/editor";
 
 class App extends React.Component {
   constructor() {
@@ -16,25 +16,23 @@ class App extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div>
-         <SidebarComponent
-         selectedNoteIndex={this.state.selectedNoteIndex}
-         notes={this.state.notes}
-         selectNote={this.selectNote}
-         deleteNote={this.deleteNote}
-         newNote={this.newNote}
-         ></SidebarComponent>
-        {
-          this.state.selectedNote ?
-          <EditorComponent
-          selectedNote={this.state.selectedNote}
+        <SidebarComponent
           selectedNoteIndex={this.state.selectedNoteIndex}
-          notes={this.state.notes}>
-          </EditorComponent>:
-          null
-        }
-
+          notes={this.state.notes}
+          selectNote={this.selectNote}
+          deleteNote={this.deleteNote}
+          newNote={this.newNote}
+        ></SidebarComponent>
+        {this.state.selectedNote ? (
+          <EditorComponent
+            selectedNote={this.state.selectedNote}
+            selectedNoteIndex={this.state.selectedNoteIndex}
+            notes={this.state.notes}
+            noteUpdate={this.noteUpdate}
+          ></EditorComponent>
+        ) : null}
       </div>
     );
   }
@@ -53,7 +51,15 @@ class App extends React.Component {
       });
   };
 
- selectNote = (note,index) => this.setState({selectedNoteIndex:index,selectedNote:note}) ;
+  selectNote = (note, index) =>
+    this.setState({ selectedNoteIndex: index, selectedNote: note });
+  noteUpdate = (id, noteObj) => {
+    firebase.firestore().collection('notes').doc(id).update({
+      title: noteObj.title,
+      body: noteObj.body,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+  };
 }
 
 export default App;

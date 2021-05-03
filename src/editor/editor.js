@@ -22,6 +22,16 @@ class EditorComponent extends React.Component {
     });
   }
   
+  componentDidUpdate = () =>{
+    // if selected note not equal to current note then update editor window
+    if(this.props.selectedNote.id !== this.state.id){
+    this.setState({
+        text: this.props.selectedNote.body,
+      title: this.props.selectedNote.title,
+      id: this.props.selectedNote.id
+      } );
+   }
+  }
 
   render() {
     const { classes } = this.props;
@@ -41,7 +51,10 @@ class EditorComponent extends React.Component {
   };
   //put text into db when user stops typing for 1.5 sec
   update = debounce(() => {
-     console.log("jhshjsgj");
+     this.props.noteUpdate(this.state.id,{
+      title: this.state.title,
+      body:this.state.text
+     })
   }, 1500);
 }
 
