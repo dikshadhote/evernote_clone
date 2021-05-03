@@ -28,7 +28,7 @@ class App extends React.Component {
         {
           this.state.selectedNote ?
           <EditorComponent
-          selectedNoteIndex={this.state.selectedNote}
+          selectedNote={this.state.selectedNote}
           selectedNoteIndex={this.state.selectedNoteIndex}
           notes={this.state.notes}>
           </EditorComponent>:
